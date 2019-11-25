@@ -2,14 +2,6 @@
 
 function task1(array $array, $boll = false)
 {
-    //Дополнительная проверка если массив слишком большой
-    $count = sizeof($array);
-    if ($count > 1000) {
-        echo "Массив слишком велик, сервак упадет, сделай поменьше";
-        die;
-        //Возможно стоит использовать else вместо die т.к. есть и другие функции
-    }
-
     if (!$boll) {
         foreach ($array as $item) {
             echo "<p>" . $item . "</p>";
@@ -21,13 +13,6 @@ function task1(array $array, $boll = false)
 
 function task2(... $arg)
 {
-    //Дополнительная проверка если массив слишком большой
-    $count = sizeof($arg);
-    if ($count > 1000) {
-        echo "Массив слишком велик, сервак упадет, сделай поменьше";
-        die;
-    }
-
     $arithmetic = array_shift($arg);
     $sum = 0;
     $error = false;
@@ -118,9 +103,5 @@ function task8($content)
 }
 function task9($fileName)
 {
-    if (!file_get_contents($fileName)) {
-        echo "Такого файла нет";
-    } else {
-        echo file_get_contents($fileName);
-    }
+    file_get_contents($fileName);
 }
