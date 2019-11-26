@@ -3,6 +3,7 @@
 function task1(array $array, $boll = false)
 {
     if (!$boll) {
+        implode()
         foreach ($array as $item) {
             echo "<p>" . $item . "</p>";
         }
@@ -15,43 +16,35 @@ function task2(... $arg)
 {
     $arithmetic = array_shift($arg);
     $sum = 0;
-    $error = false;
-    $result = false;
 
     switch ($arithmetic) {
         case "+":
             foreach ($arg as $value) {
                 $sum += $value;
             }
-            $result = implode($arithmetic, $arg) . " = " . $sum;
+            return implode($arithmetic, $arg) . " = " . $sum;
             break;
         case "-":
             foreach ($arg as $value) {
                 $sum -= $value;
             }
-            $result = implode($arithmetic, $arg) . " = " . $sum;
+            return implode($arithmetic, $arg) . " = " . $sum;
             break;
         case "*":
             $sum = 1;
             foreach ($arg as $value) {
                 $sum *= $value;
             }
-            $result = implode($arithmetic, $arg) . " = " . $sum;
+            return implode($arithmetic, $arg) . " = " . $sum;
             break;
         case "/":
             foreach ($arg as $value) {
                 $sum /= $value;
             }
-            $result = implode($arithmetic, $arg) . " = " . $sum;
+            return implode($arithmetic, $arg) . " = " . $sum;
             break;
         default:
-            $error = "Что то не то отправили иди в код смотри";
-    }
-
-    if ($error) {
-        return $error;
-    } else {
-        return $result;
+            return "Что то не то отправили иди в код смотри";
     }
 }
 
