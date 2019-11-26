@@ -3,7 +3,6 @@
 function task1(array $array, $boll = false)
 {
     if (!$boll) {
-        implode()
         foreach ($array as $item) {
             echo "<p>" . $item . "</p>";
         }
