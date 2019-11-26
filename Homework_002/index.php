@@ -8,7 +8,7 @@ echo "<pre>";
 //Задание 1
 echo "<h2>Задание 1</h2>";
 $array = ["hi", "word", "php", "js", "html", "css"];
-echo task1($array, true);
+echo task1($array);
 echo "<br><br><br>";
 
 

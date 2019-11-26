@@ -3,9 +3,7 @@
 function task1(array $array, $boll = false)
 {
     if (!$boll) {
-        foreach ($array as $item) {
-            echo "<p>" . $item . "</p>";
-        }
+        return "<p>" . implode("</p><p>", $array) . "</p>";
     } else {
         return implode(",", $array);
     }
@@ -93,6 +91,7 @@ function task8($content)
 {
     file_put_contents("test.txt", $content);
 }
+
 function task9($fileName)
 {
     file_get_contents($fileName);
