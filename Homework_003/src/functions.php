@@ -2,7 +2,7 @@
 
 function task1()
 {
-    $data = file_get_contents("./data.xml");
+    $data = file_get_contents(__DIR__."/../data.xml");
     $xml = new SimpleXMLElement($data);
 
     $i = 0;
@@ -80,18 +80,15 @@ function task3()
         $array[] = rand(1, 100);
     }
 
-    $filePatch = "./test.csv";
+    $filePatch = __DIR__."/../test.csv";
     $fp = fopen($filePatch, "w");
     fputcsv($fp, $array, ";");
     fclose($fp);
     echo "файл успешно записан".PHP_EOL;
     $csvFile = fopen($filePatch, "r");
+    $csvData = fgetcsv($csvFile, 500, ";");
     if ($csvFile) {
-        $res = [];
-        while (($csvData = fgetcsv($csvFile, 500, ";")) !== false) {
-            $res = $csvData;
-        }
-        echo "Сумма в csv файле = ".array_sum($res);
+        echo "Сумма в csv файле = ".array_sum($csvData);
     }
 }
 
