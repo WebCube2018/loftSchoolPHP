@@ -4,16 +4,11 @@
 function connect()
 {
     global $pdo;
-    try {
-        $pdo = new PDO(HOST_NAME, USER_NAME, PASSWORD);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $data = [
-            "order" =>order($_POST)
-        ];
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-        die();
-    }
+    $pdo = new PDO(HOST_NAME, USER_NAME, PASSWORD);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $data = [
+        "order" =>order($_POST)
+    ];
 
     return $data;
 }
