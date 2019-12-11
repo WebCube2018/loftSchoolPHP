@@ -1,14 +1,14 @@
 <?php
 
 //Подключение PDO
-function PDO($hostName, $userName, $password)
+function connect()
 {
+    global $pdo;
     try {
-        $pdo = new PDO($hostName, $userName, $password);
+        $pdo = new PDO(HOST_NAME, USER_NAME, PASSWORD);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $data = [
-            "order" =>order($pdo, $_POST),
-            "pdo" => $pdo
+            "order" =>order($_POST)
         ];
     } catch (PDOException $e) {
         echo $e->getMessage();
@@ -19,21 +19,23 @@ function PDO($hostName, $userName, $password)
 }
 
 //Выполняем закза
-function order($pdo, $data)
+function order($data)
 {
+    global $pdo;
     $stmt = $pdo->prepare("SELECT id, email FROM users WHERE email = ? ");
     $stmt->execute([$data["email"]]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($result) {
-        return addOrder($pdo, $data, $result);
+        return addOrder($data, $result);
     }
-    return addUser($pdo, $data);
+    return addUser($data);
 }
 
 //Добавляем заказ в базу
-function addOrder($pdo, $data, $result)
+function addOrder($data, $result)
 {
+    global $pdo;
     $stmt = $pdo->prepare("
         INSERT INTO orders (user_id, comments, payment, street, house, appart, housing, floor, call_back) 
         VALUES (:userId, :comments, :payment, :street, :house, :housing, :appart, :floor, :call_back)
@@ -54,9 +56,10 @@ function addOrder($pdo, $data, $result)
 }
 
 //Добавляем пользователя в БД
-function addUser($pdo, $data)
+function addUser($data)
 {
     /* @var PDOStatement $stmt */
+    global $pdo;
     $stmt = $pdo->prepare("INSERT INTO users (email, name, phone) VALUES (:email, :name, :phone)");
 
     $stmt->bindParam(":email", $data["email"]);
@@ -65,12 +68,13 @@ function addUser($pdo, $data)
     $stmt->execute();
     $res["id"] = $pdo->lastInsertId();
 
-    return addOrder($pdo, $data, $res);
+    return addOrder($data, $res);
 }
 
 //Получаем всех пользователей
-function allUsers($pdo)
+function allUsers()
 {
+    global $pdo;
     $stmt = $pdo->prepare("SELECT * FROM users");
     $stmt->execute();
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -79,8 +83,9 @@ function allUsers($pdo)
 }
 
 //Получаем все заказы
-function allOrder($pdo)
+function allOrder()
 {
+    global $pdo;
     $stmt = $pdo->prepare("SELECT * FROM orders");
     $stmt->execute();
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -88,8 +93,10 @@ function allOrder($pdo)
     return $users;
 }
 
-function sendOrder($pdo, $orderId)
+function sendOrder($orderId)
 {
+    global $pdo;
+
     //Получим заказ
     $stmt = $pdo->prepare("SELECT id, user_id, street, house, appart, housing, floor FROM orders WHERE id = ? ");
     $stmt->execute([$orderId]);

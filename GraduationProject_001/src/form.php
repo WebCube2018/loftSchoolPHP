@@ -1,12 +1,13 @@
 <?php
 
-require_once "login.php";
+require_once "confPDO.php";
 require_once "function.php";
 
-$data = PDO($hostName, $userName, $password, $_POST);
+$data = connect();
+
 
 //Если заказ добавлен отправим письмо
 if ($data) {
-    $res = sendOrder($data["pdo"], (int)$data["order"]);
+    $res = sendOrder((int)$data["order"]);
     echo $res;
 }
