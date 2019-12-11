@@ -4,7 +4,7 @@ require_once "../src/login.php";
 require_once "../src/function.php";
 
 try {
-    $pdo = new PDO($hostName, $userName, $password);
+    $pdo = new PDO(USER_NAME, USER_NAME, PASSWORD);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $data = allOrder($pdo);
 } catch (PDOException $e) {

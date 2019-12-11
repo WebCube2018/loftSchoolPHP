@@ -1,5 +1,23 @@
 <?php
 
+//Подключение PDO
+function PDO($hostName, $userName, $password)
+{
+    try {
+        $pdo = new PDO($hostName, $userName, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $data = [
+            "order" =>order($pdo, $_POST),
+            "pdo" => $pdo
+        ];
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+        die();
+    }
+
+    return $data;
+}
+
 //Выполняем закза
 function order($pdo, $data)
 {
