@@ -4,6 +4,17 @@ namespace src\CountingProcess;
 
 abstract class CountingProcess
 {
+    //Возрасты для проверки
+    private const YOUNG_AGE = 18;
+    private const YOUNG_AGE_COEFFICIENT = 21;
+    private const OLD_AGE = 65;
+
+    //Делитель для молодежного коэффициента
+    private const DIVIDER_COEFFICIENT = 0.1;
+
+    //Кол-во минут в часе
+    protected const MINUTES = 60;
+
     protected $age;
     protected $countKM;
     protected $time;
@@ -19,22 +30,24 @@ abstract class CountingProcess
         $this->addition = $addition;
     }
 
+    //Метод проверки возраста
     protected function checkAge()
     {
-        if ($this->age < 18 && $this->age > 65) {
+        if ($this->age < self::YOUNG_AGE || $this->age > self::OLD_AGE) {
             return false;
-        } elseif ($this->age >= 18 && $this->age <= 21) {
-            $this->priceKM = $this->priceKM * 0.1;
-            $this->priceTime = $this->priceTime * 0.1;
+        } elseif ($this->age >= self::YOUNG_AGE && $this->age <= self::YOUNG_AGE_COEFFICIENT) {
+            $this->priceKM = $this->priceKM * self::DIVIDER_COEFFICIENT + $this->priceKM;
+            $this->priceTime = $this->priceTime * self::DIVIDER_COEFFICIENT + $this->priceTime;
             return true;
         }
         return true;
     }
 
+    //Метод подсчета стоимости тарифа
     protected function priceBill()
     {
         if ($this->checkAge()) {
-            return $this->countKM * $this->priceKM;
+            return ($this->countKM * $this->priceKM) + ($this->time * $this->priceTime);
         }
         return "Уважаемый пользователь у тебя возраст не тот";
     }
