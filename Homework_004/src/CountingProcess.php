@@ -15,6 +15,9 @@ abstract class CountingProcess
     //Кол-во минут в часе
     protected const MINUTES = 60;
 
+    //Дополнительные услуги
+    protected const SERVICES_GPS = 15;
+
     protected $age;
     protected $countKM;
     protected $time;

@@ -2,6 +2,9 @@
 //Подключаем Абстрактный класс
 require_once "src/CountingProcess.php";
 
+//Подключаем дополнительные услуги
+require_once "src/TraitGps.php";
+
 //Подключаем тарифы
 require_once "src/TariffBasic.php";
 require_once "src/TariffHour.php";
