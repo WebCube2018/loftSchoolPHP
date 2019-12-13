@@ -3,5 +3,6 @@ namespace test\Mother;
 
 class Mother
 {
-    //свойства и методы
+    public $hair;
+    public $eyes;
 }

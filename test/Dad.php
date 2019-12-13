@@ -3,5 +3,6 @@ namespace test\Dad;
 
 class Dad
 {
-    //свойства и методы
+    public $hair;
+    public $eyes;
 }
