@@ -3,6 +3,8 @@
 namespace src\TariffDay;
 
 use src\CountingProcess\CountingProcess;
+use src\TraitDrive\TraitDrive;
+use src\TraitGps\TraitGps;
 
 class TariffDay extends CountingProcess
 {
@@ -14,6 +16,9 @@ class TariffDay extends CountingProcess
     private const MINUTES_DAY = 1440;
     private const DAY_COEFFICIENT = 1;
 
+    use TraitDrive;
+    use TraitGps;
+
     public function priceDay()
     {
         if ($this->time % self::MINUTES > self::MINUTES_CONDITION) {
@@ -22,6 +27,11 @@ class TariffDay extends CountingProcess
         } else {
             $this->time = floor($this->time / self::MINUTES_DAY);
         }
+
+        if ($this->addition) {
+            return $this->priceBillDrive() + $this->priceBillGps();
+        }
+
         return $this->priceBill();
     }
 }

@@ -17,6 +17,7 @@ abstract class CountingProcess
 
     //Дополнительные услуги
     protected const SERVICES_GPS = 15;
+    protected const SERVICES_DRIVE = 100;
 
     protected $age;
     protected $countKM;
@@ -39,8 +40,8 @@ abstract class CountingProcess
         if ($this->age < self::YOUNG_AGE || $this->age > self::OLD_AGE) {
             return false;
         } elseif ($this->age >= self::YOUNG_AGE && $this->age <= self::YOUNG_AGE_COEFFICIENT) {
-            $this->priceKM = $this->priceKM * self::DIVIDER_COEFFICIENT + $this->priceKM;
-            $this->priceTime = $this->priceTime * self::DIVIDER_COEFFICIENT + $this->priceTime;
+            $this->priceKM = ($this->priceKM * self::DIVIDER_COEFFICIENT) + $this->priceKM;
+            $this->priceTime = ($this->priceTime * self::DIVIDER_COEFFICIENT) + $this->priceTime;
             return true;
         }
         return true;
@@ -50,8 +51,8 @@ abstract class CountingProcess
     protected function priceBill()
     {
         if ($this->checkAge()) {
-            return ($this->countKM * $this->priceKM) + ($this->time * $this->priceTime);
+            return  ($this->countKM * $this->priceKM) + ($this->time * $this->priceTime);
         }
-        return "Уважаемый пользователь у тебя возраст не тот";
+        return (string) "Уважаемый пользователь у тебя возраст не тот";
     }
 }

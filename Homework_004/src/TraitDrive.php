@@ -1,7 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: donec
- * Date: 2019-12-12
- * Time: 12:42
- */
+namespace src\TraitDrive;
+
+trait TraitDrive
+{
+    protected $resultDrive;
+
+    public function priceBillDrive()
+    {
+        $this->resultDrive = parent::priceBill();
+        return  $this->resultDrive + self::SERVICES_DRIVE;
+    }
+}
