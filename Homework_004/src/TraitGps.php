@@ -1,14 +1,14 @@
 <?php
 namespace src\TraitGps;
 
-use src\CountingProcess\CountingProcess;
-
 trait TraitGps
 {
-    public function priceBill(CountingProcess $countingProcess)
+    protected $result;
+
+    public function priceBillGps()
     {
-        $result =  $countingProcess->priceBill();
-        $countingProcess->time = $countingProcess->time / $countingProcess::MINUTES;
-        return $countingProcess->time * $countingProcess::SERVICES_GPS + $result;
+        $this->result = parent::priceBill();
+        $this->time = ceil($this->time / self::MINUTES);
+        return  $this->result + (self::SERVICES_GPS * $this->time);
     }
 }
