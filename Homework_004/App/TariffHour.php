@@ -1,10 +1,6 @@
 <?php
 
-namespace src\TariffHour;
-
-use src\CountingProcess\CountingProcess;
-use src\TraitDrive\TraitDrive;
-use src\TraitGps\TraitGps;
+namespace App;
 
 class TariffHour extends CountingProcess
 {

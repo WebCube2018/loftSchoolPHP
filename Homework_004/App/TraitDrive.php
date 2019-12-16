@@ -1,5 +1,5 @@
 <?php
-namespace src\TraitDrive;
+namespace App;
 
 trait TraitDrive
 {

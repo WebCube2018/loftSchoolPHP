@@ -1,24 +1,17 @@
 <?php
-//Подключаем Абстрактный класс
-require_once "src/CountingProcess.php";
+//Автолоадер
+spl_autoload_register(function ($className) {
+    $className = str_replace("\\", "/", $className);
+    require_once "".$className.".php";
+});
 
-//Подключаем дополнительные услуги
-require_once "src/TraitGps.php";
-require_once "src/TraitDrive.php";
-
-//Подключаем тарифы
-require_once "src/TariffBasic.php";
-require_once "src/TariffHour.php";
-require_once "src/TariffDay.php";
-require_once "src/TariffStudent.php";
-
-use src\TariffBasic\TariffBasic;
-use src\TariffHour\TariffHour;
-use src\TariffDay\TariffDay;
-use src\TariffStudent\TariffStudent;
+use App\TariffBasic;
+use App\TariffHour;
+use App\TariffDay;
+use App\TariffStudent;
 
 //Константы значений для вычисления в тарифах
-const AGE = 25;
+const AGE = 21;
 const KM = 4;
 const MINUTES = 65;
 

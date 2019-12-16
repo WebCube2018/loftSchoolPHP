@@ -1,5 +1,5 @@
 <?php
-namespace src\TraitGps;
+namespace App;
 
 trait TraitGps
 {

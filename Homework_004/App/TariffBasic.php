@@ -1,9 +1,6 @@
 <?php
 
-namespace src\TariffBasic;
-
-use src\CountingProcess\CountingProcess;
-use src\TraitGps\TraitGps;
+namespace App;
 
 class TariffBasic extends CountingProcess
 {
